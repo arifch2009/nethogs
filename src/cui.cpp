@@ -32,7 +32,7 @@
 #include <ncurses.h>
 #include "nethogs.h"
 #include "process.h"
-
+#include <ctime>
 std::string *caption;
 extern const char version[];
 extern ProcList *processes;
@@ -295,7 +295,15 @@ void ui_tick() {
 }
 
 void show_trace(Line *lines[], int nproc) {
-  std::cout << "\nRefreshing:\n";
+
+  // current date/time based on current system
+   time_t now = time(0);
+   
+   // convert now to string form
+   char* dt = ctime(&now);
+
+
+  std::cout << "\nRefreshing:" << dt <"\n";
 
   /* print them */
   for (int i = 0; i < nproc; i++) {
